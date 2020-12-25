@@ -3308,6 +3308,9 @@ class Project(object):
         raise NoManifestException(path, str(e))
       try:
         line = line.decode()
+      except UnicodeDecodeError:
+        line = line.decode("utf8")
+        print("Warning: unexpected utf8 character found!")
       except AttributeError:
         pass
       if line.startswith('ref: '):
